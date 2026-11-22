@@ -1,4 +1,4 @@
-@prefix : <https://w3id.org/golem/ontology/response#> .
+@prefix digd: <https://w3id.org/digd/ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -8,39 +8,117 @@
 @prefix crmdig: <http://www.cidoc-crm.org/extensions/crmdig/> .
 @prefix lrmoo: <https://cidoc-crm.org/extensions/lrmoo/owl/> .
 @prefix schema: <http://schema.org/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-<https://w3id.org/golem/ontology/response#> a owl:Ontology ;
-    owl:imports <http://erlangen-crm.org/240307/> .
+
+bibo:doi a owl:AnnotationProperty .
+
+bibo:status a owl:AnnotationProperty .
+
+dc:contributor a owl:AnnotationProperty .
+
+dc:creator a owl:AnnotationProperty .
+
+dc:date a owl:AnnotationProperty .
+
+dc:description a owl:AnnotationProperty .
+
+dc:language a owl:AnnotationProperty .
+
+dc:title a owl:AnnotationProperty .
+
+dcterms:bibliographicCitation a owl:AnnotationProperty .
+
+dcterms:created a owl:AnnotationProperty .
+
+dcterms:issued a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:modified a owl:AnnotationProperty .
+
+dcterms:publisher a owl:AnnotationProperty .
+
+dcterms:source a owl:AnnotationProperty .
+
+schema:codeRepository a owl:AnnotationProperty .
+
+schema:keywords a owl:AnnotationProperty .
+
+skos:note a owl:AnnotationProperty .
+
+vann:changes a owl:AnnotationProperty .
+
+vann:example a owl:AnnotationProperty .
+
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+
+
+<https://w3id.org/digd/ontology/> a owl:Ontology ;
+# SPAR ontology metadata checklist
+# Identification - vann:preferredNamespaceUri - vann:preferredNamespacePrefix
+    vann:preferredNamespaceUri <https://w3id.org/digd/ontology/> ;
+    vann:preferredNamespacePrefix "digd" ;
+# Description - rdfs:label - dcterms:title - dc:description - bibo:status - schema:keywords
+    rdfs:label "The Digital Discourse Ontology"@en ;
+    dcterms:title "The Digital Discourse Ontology"@en ;
+    dc:description """ """@en ;
+    bibo:status <http://purl.org/ontology/bibo/status/draft> ;
+    schema:keywords "OWL ontology"@en,
+        "digital objects"@en,
+        "research software"@en ;
+# Version and provenance - owl:versionIRI - owl:versionInfo - owl:priorVersion (if previous version exists) - dcterms:created - dcterms:source - vann:changes
+    owl:versionIRI <https://w3id.org/digd/ontology/2026-11-22> ;
+    owl:versionInfo "1.0"^^xsd:string ;
+    dcterms:created "2026-11-22" ;
+    dcterms:source <https://github.com/Digital-Discourse/digd_ontology/tree/main/development> ;
+# License - dcterms:license
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+# Attribution - dc:creator - dc:contributor - dcterms:publisher
+    dc:creator "Regina W.K. Manyara (https://orcid.org/0009-0007-6773-3910)"^^xsd:string ;
+# Citation - bibo:doi - dcterms:bibliographicCitation
+    bibo:doi "TBA" ;
+    dcterms:bibliographicCitation "TBA" ;
+# Related resources - owl:imports - rdfs:seeAlso (link to website) - schema:codeRepository
+    owl:imports <http://erlangen-crm.org/240307/> ;
+    rdfs:seeAlso <> ;
+    schema:codeRepository <https://github.com/Digital-Discourse/digd_ontology> .
 
 #Object Properties
 
-:has_topic a owl:ObjectProperty ;
+digd:has_topic a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P129_is_about ;
-    rdfs:domain :Discourse_Act ;
-    rdfs:range :Creative_Discourse_Topic ;
+    rdfs:domain digd:Discourse_Act ;
+    rdfs:range digd:Creative_Discourse_Topic ;
     rdfs:label "has topic" ;
     rdfs:comment "This property connects a discourse act to a discourse topic about creative works." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:has_user_role a owl:ObjectProperty ;
+digd:has_user_role a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P2_has_type ;
-    rdfs:domain :User ;
-    rdfs:range :User_Role ;
+    rdfs:domain digd:User ;
+    rdfs:range digd:User_Role ;
     rdfs:label "has user role" ;
     rdfs:comment "This property connects a user to the role they have on a particular website or platform." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:has_sentiment a owl:ObjectProperty ;
+digd:has_sentiment a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P2_has_type ;
-    rdfs:domain :Discourse_Act ;
-    rdfs:range :Discourse_Sentiment ;
+    rdfs:domain digd:Discourse_Act ;
+    rdfs:range digd:Discourse_Sentiment ;
     rdfs:label "has sentiment" ;
     rdfs:comment "This property connects a discourse act to its positive or negative sentiment value." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:has_comment a owl:ObjectProperty ;
+digd:has_comment a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P148_has_component ;
-    rdfs:domain :Thread ;
+    rdfs:domain digd:Thread ;
     rdfs:range [
         a owl:Class ;
         owl:intersectionOf (
@@ -53,11 +131,11 @@
     ] ;
     rdfs:label "has comment" ;
     rdfs:comment "This property connects a thread to the comment which forms part of it." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:is_comment_of a owl:ObjectProperty ;
+digd:is_comment_of a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P148i_is_component_of ;
-    owl:inverseOf :has_comment ;
+    owl:inverseOf digd:has_comment ;
     rdfs:domain [
         a owl:Class ;
         owl:intersectionOf (
@@ -68,18 +146,18 @@
             ]
         )
     ] ;
-    rdfs:range :Thread ;
+    rdfs:range digd:Thread ;
     rdfs:label "is comment of" ;
     rdfs:comment "Inverse property of has_comment." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:responds_to a owl:ObjectProperty ;
+digd:responds_to a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P67_refers_to ;
-    rdfs:domain :Discourse_Act ;
+    rdfs:domain digd:Discourse_Act ;
     rdfs:range crm:E73_Information_Object ;
     rdfs:label "responds to" ;
     rdfs:comment "This property is used to describe the response relationship between two discourse acts." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
 schema:parentItem a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P67_refers_to ;
@@ -99,15 +177,13 @@ schema:parentItem a owl:ObjectProperty ;
             crmdig:D1_Digital_Object
             [ a owl:Restriction ;
               owl:onProperty crm:P2_has_type ;
-              owl:someValuesFrom :InternetObject
+              owl:someValuesFrom digd:InternetObject
             ]
         )
     ] ;
     rdfs:label "parent item" ;
     rdfs:comment "This property describes the parent object of a comment in a webpage, being either a post or another comment." ;
     rdfs:isDefinedBy <http://schema.org/> .
-
-#iteration 2 object properties
 
 crmdig:L11_had_output a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P94_has_created ;
@@ -149,24 +225,24 @@ schema:creator a owl:ObjectProperty ;
     rdfs:label "creator" ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-:encodes a owl:ObjectProperty ;
+digd:encodes a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P130_shows_features_of ;
     rdfs:domain crmdig:D1_Digital_Object ;
     rdfs:range crm:E73_Information_Object ;
-    owl:inverseOf :encoded_by ;
+    owl:inverseOf digd:encoded_by ;
     rdfs:label "encodes" ;
     rdfs:comment "Describes the digital encoding of an immaterial expression onto a digital object (including other digital objects). This is used to show the bearer relationship between different layers of a digital object" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:encoded_by a owl:ObjectProperty ;
+digd:encoded_by a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P130i_features_are_also_found_on ;
     rdfs:domain crm:E73_Information_Object ;
     rdfs:range crmdig:D1_Digital_Object ;
-    owl:inverseOf :encodes ;
+    owl:inverseOf digd:encodes ;
     rdfs:label "encoded_by" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:has_webpage a owl:ObjectProperty ;
+digd:has_webpage a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P148_has_component ;
     rdfs:domain [
         a owl:Class ;
@@ -188,12 +264,12 @@ schema:creator a owl:ObjectProperty ;
             ]
         )
     ] ;
-    owl:inverseOf :is_webpage_of ;
+    owl:inverseOf digd:is_webpage_of ;
     rdfs:label "has webpage" ;
     rdfs:comment "Connects a website to the webpage it contains." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:is_webpage_of a owl:ObjectProperty ;
+digd:is_webpage_of a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P148i_is_component_of ;
     rdfs:domain [
         a owl:Class ;
@@ -215,9 +291,9 @@ schema:creator a owl:ObjectProperty ;
             ]
         )
     ] ;
-    owl:inverseOf :has_webpage ;
+    owl:inverseOf digd:has_webpage ;
     rdfs:label "is webpage of" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
 schema:associatedMedia a owl:ObjectProperty ;
     rdfs:subPropertyOf crm:P148_has_component ;
@@ -264,7 +340,7 @@ schema:dateModified a owl:DatatypeProperty ;
     rdfs:comment "Date on which the digital object was most recently modified, such as an edit to a post, comment or webpage. This is a shortcut for the time-span of the D7 Digital Machine Event through which the modification was performed." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-:viewCount a owl:DatatypeProperty;
+digd:viewCount a owl:DatatypeProperty;
     rdfs:subPropertyOf schema:userInteractionCount ;
     rdfs:domain [
         a owl:Class ;
@@ -272,14 +348,14 @@ schema:dateModified a owl:DatatypeProperty ;
             crmdig:D1_Digital_Object
             [ a owl:Restriction ;
               owl:onProperty crm:P2_has_type ;
-              owl:someValuesFrom :InternetObject
+              owl:someValuesFrom digd:InternetObject
             ]
         )
     ] ;
     rdfs:range xsd:integer ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:likeCount a owl:DatatypeProperty;
+digd:likeCount a owl:DatatypeProperty;
     rdfs:subPropertyOf schema:userInteractionCount ;
     rdfs:domain [
         a owl:Class ;
@@ -287,14 +363,14 @@ schema:dateModified a owl:DatatypeProperty ;
             crmdig:D1_Digital_Object
             [ a owl:Restriction ;
               owl:onProperty crm:P2_has_type ;
-              owl:someValuesFrom :InternetObject
+              owl:someValuesFrom digd:InternetObject
             ]
         )
     ] ;
     rdfs:range xsd:integer ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:upvoteCount a owl:DatatypeProperty;
+digd:upvoteCount a owl:DatatypeProperty;
     rdfs:subPropertyOf schema:userInteractionCount ;
     rdfs:domain [
         a owl:Class ;
@@ -302,14 +378,14 @@ schema:dateModified a owl:DatatypeProperty ;
             crmdig:D1_Digital_Object
             [ a owl:Restriction ;
               owl:onProperty crm:P2_has_type ;
-              owl:someValuesFrom :InternetObject
+              owl:someValuesFrom digd:InternetObject
             ]
         )
     ] ;
     rdfs:range xsd:integer ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:downvoteCount a owl:DatatypeProperty;
+digd:downvoteCount a owl:DatatypeProperty;
     rdfs:subPropertyOf schema:userInteractionCount ;
     rdfs:domain [
         a owl:Class ;
@@ -317,12 +393,12 @@ schema:dateModified a owl:DatatypeProperty ;
             crmdig:D1_Digital_Object
             [ a owl:Restriction ;
               owl:onProperty crm:P2_has_type ;
-              owl:someValuesFrom :InternetObject
+              owl:someValuesFrom digd:InternetObject
             ]
         )
     ] ;
     rdfs:range xsd:integer ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
 schema:text a owl:DatatypeProperty;
     rdfs:subPropertyOf crm:P3_has_note ;
@@ -336,67 +412,65 @@ schema:title a owl:DatatypeProperty;
 
 #Classes
 
-:Discourse_Act a owl:Class ;
+digd:Discourse_Act a owl:Class ;
     rdfs:subClassOf crm:E73_Information_Object ;
     rdfs:label "Discourse Act" ;
     rdfs:comment "An instance of communication performed by an actor in order to convey an idea, opinion, feeling etc." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Thread a owl:Class ;
+digd:Thread a owl:Class ;
     rdfs:subClassOf crm:E73_Information_Object ;
     rdfs:label "Thread" ;
     rdfs:comment "A formal tree structure of discourse act comments in a digital setting." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Discourse_Act_Type a owl:Class ;
+digd:Discourse_Act_Type a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "Discourse Act Type" ;
     rdfs:comment "A set of characteristic tags describing the different types of discourse acts derived and extended from the set outlined by 'Zhang, A., Culbertson, B., & Paritosh, P. (2017). Characterizing Online Discussion Using Coarse Discourse Sequences.'" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
     
-:Creative_Discourse_Topic a owl:Class ;
+digd:Creative_Discourse_Topic a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
-    rdfs:label "Creative Discourse Theme" ;
-    rdfs:comment "The themes in which discourse about creative works can centre around. The three subclasses are adapted from the evaluation characteristics outlined by 'Rebora, S., & Vezzani, G. (2024). Models of Literary Evaluation and Web 2.0. An Annotation Experiment with Goodreads Reviews.'. This class and its subclasses can be used as an interface for different types of creative and literary analysis and can be extended with specific vocabulary terms as needed." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:label "Creative Discourse Topic" ;
+    rdfs:comment "The topics in which discourse about creative works can centre around. The three subclasses are adapted from the evaluation characteristics outlined by 'Rebora, S., & Vezzani, G. (2024). Models of Literary Evaluation and Web 2.0. An Annotation Experiment with Goodreads Reviews.'. This class and its subclasses can be used as an interface for different types of creative and literary analysis and can be extended with specific vocabulary terms as needed." ;
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Discourse_Sentiment a owl:Class ;
+digd:Discourse_Sentiment a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "Sentiment" ;
     rdfs:comment "Describes sentiment of a discourse act, either positive or negative. Unlike discourse acts like Appreciation which has an implicit positive degree, this can be assigned to discourse acts without an implicit degree like Evaluation" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Thread_Type a owl:Class ;
+digd:Thread_Type a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "Thread Type" ;
     rdfs:comment "Describes the nested level of a thread. The type tags are derived from 'Liu, Y., Choi, F., & Chandrasekharan, E. (2026). Needling Through the Threads: A Visualization Tool for Navigating Threaded Online Discussions.'." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:User_Role a owl:Class ;
+digd:User_Role a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "User Role" ;
     rdfs:comment "The role a user plays on a webpage. This can be extended depending on the webpage in which a user is acting on. Different websites will have different user roles." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Textual_Metatextual_Material a owl:Class ;
-    rdfs:subClassOf :Creative_Discourse_Topic ;
+digd:Textual_Metatextual_Material a owl:Class ;
+    rdfs:subClassOf digd:Creative_Discourse_Topic ;
     rdfs:label "Textual and Metatextual Material" ;
-    rdfs:comment "This theme regards all the textual and metatextual material of a creative work. This includes everything from the style, linguistic and other creative features, formal structure to the plot, the characters, narrative themes, and direct quotes from the work etc." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:comment "This topic regards all the textual and metatextual material of a creative work. This includes everything from the style, linguistic and other creative features, formal structure to the plot, the characters, narrative themes, and direct quotes from the work etc." ;
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Individual_Experience a owl:Class ;
-    rdfs:subClassOf :Creative_Discourse_Topic ;
+digd:Individual_Experience a owl:Class ;
+    rdfs:subClassOf digd:Creative_Discourse_Topic ;
     rdfs:label "Individual Experience" ;
-    rdfs:comment "This theme focuses on an individual's cognitive, emotional or existential experience of a creative work, including how they personally interacted with it." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:comment "This topic focuses on an individual's cognitive, emotional or existential experience of a creative work, including how they personally interacted with it." ;
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Social_Impact a owl:Class ;
-    rdfs:subClassOf :Creative_Discourse_Topic ;
+digd:Social_Impact a owl:Class ;
+    rdfs:subClassOf digd:Creative_Discourse_Topic ;
     rdfs:label "Social Impact" ;
-    rdfs:comment "This theme focuses on how a creative work relates to its wider social context. This includes its genre and style classification, canonisation, awards as well as its impact and role in different communities (e.g. fandoms, literary circles, academic institutions etc.)" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
-
-#iteration 2 classes
+    rdfs:comment "This topic focuses on how a creative work relates to its wider social context. This includes its genre and style classification, canonisation, awards as well as its impact and role in different communities (e.g. fandoms, literary circles, academic institutions etc.)" ;
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
 crmdig:D1_Digital_Object a owl:Class ;
     rdfs:subClassOf crm:E73_Information_Object ;
@@ -422,25 +496,25 @@ schema:MediaObject a owl:Class ;
     rdfs:comment " This class specifies all types of D1_Digital_Object with a data file type that encodes some sort of media object such as an image, video, or audio object." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-:InternetObject a owl:Class ;
+digd:InternetObject a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "Internet Object" ;
     rdfs:comment "This class specifies all types of D1_Digital_Object connected to the internet space. It is used as a container for schema.org vocabularly of internet-specific objects." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:SoftwareObject a owl:Class ;
+digd:SoftwareObject a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "Software Object" ;
     rdfs:comment "This class specifies all types of D1_Digital_Object that have a program file type." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:InternetAction a owl:Class ;
+digd:InternetAction a owl:Class ;
     rdfs:subClassOf crm:E55_Type ;
     rdfs:label "Internet Action" ;
     rdfs:comment "This class specifies the types of D7_Digital_Machine_Event which can be performed by a User on the internet. Internet Actions involve at least some D1_Digital_Object with an Internet Object type. " ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:User a owl:Class ;
+digd:User a owl:Class ;
     owl:equivalentClass [
         a owl:Class ;
         owl:intersectionOf (
@@ -455,7 +529,7 @@ schema:MediaObject a owl:Class ;
                         [
                             a owl:Restriction ;
                             owl:onProperty crm:P2_has_type ;
-                            owl:someValuesFrom :InternetAction
+                            owl:someValuesFrom digd:InternetAction
                         ]
                     )
                 ]
@@ -464,194 +538,192 @@ schema:MediaObject a owl:Class ;
     ] ;
     rdfs:label "User" ;
     rdfs:comment "An actor who interacts with digital objects on webpages." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-#Individuals
+#Named Individuals
 
-:Statement a :Discourse_Act_Type ;
+digd:Statement a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Statement" ;
     rdfs:comment "The most generic form of discourse, presenting some new information (a piece of news, story, opinion etc.)." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Question a :Discourse_Act_Type ;
+digd:Question a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Question" ;
     rdfs:comment "A discourse act with a question or request." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Answer a :Discourse_Act_Type ;
+digd:Answer a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Answer" ;
     rdfs:comment "A discourse act responding to a Question." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Agreement a :Discourse_Act_Type ;
+digd:Agreement a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Agreement" ;
     rdfs:comment "A discourse act expressing agreement to some idea or opinion." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Disagreement a :Discourse_Act_Type ;
+digd:Disagreement a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Disagreement" ;
     rdfs:comment "A discourse act expressing disagreement, as well as correcting, criticising, contradicting or objecting to some idea or opinion." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Appreciation a :Discourse_Act_Type ;
+digd:Appreciation a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Appreciation" ;
     rdfs:comment "A positive discourse act expressing thanks, appreciation, excitement and general positive feelings about something." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:NegativeReaction a :Discourse_Act_Type ;
+digd:NegativeReaction a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Negative Reaction" ;
     rdfs:comment "A negative discourse act, attacking, mocking, expressing hate, disgust, anger and general negative feelings about something." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Elaboration a :Discourse_Act_Type ;
+digd:Elaboration a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Elaboration" ;
     rdfs:comment "A discourse act adding or expanding on information or an opinion expressed prior." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Humour a :Discourse_Act_Type ;
+digd:Humour a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Humour" ;
     rdfs:comment "A discourse act made just for the purpose of a joke, to get a laugh and not necessarily to add any new information." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Evaluation a :Discourse_Act_Type ;
+digd:Evaluation a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Evaluation" ;
     rdfs:comment "A discourse act expressing an assessment of quality of something (e.g. creative work)." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Suggestion a :Discourse_Act_Type ;
+digd:Suggestion a digd:Discourse_Act_Type, owl:NamedIndividual ;
     rdfs:label "Suggestion" ;
     rdfs:comment "A discourse act expressing a correction, improvement, change, to an idea or action." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:TextualMetatextualMaterial a :Textual_Metatextual_Material ;
+digd:TextualMetatextualMaterial a digd:Textual_Metatextual_Material, owl:NamedIndividual ;
     rdfs:label "Textual and Metatextual Material" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:IndividualExperience a :Individual_Experience ;
+digd:IndividualExperience a digd:Individual_Experience, owl:NamedIndividual ;
     rdfs:label "Individual Experience" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:SocialImpact a :Social_Impact ;
+digd:SocialImpact a digd:Social_Impact, owl:NamedIndividual ;
     rdfs:label "Social Impact" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:PostThread a :Thread_Type ;
+digd:PostThread a digd:Thread_Type, owl:NamedIndividual ;
     rdfs:label "Post Thread" ;
     rdfs:comment "A thread comprised of a post and all the comments which come under it." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:TopLevelCommentThread a :Thread_Type ;
+digd:TopLevelCommentThread a digd:Thread_Type, owl:NamedIndividual ;
     rdfs:label "Top-Level Comment Thread" ;
     rdfs:comment "A thread made of all the top-level comments under a post." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:NestedThread a :Thread_Type ;
+digd:NestedThread a digd:Thread_Type, owl:NamedIndividual ;
     rdfs:label "Nested Thread" ;
     rdfs:comment "A thread which has as its parent a top-level comment, containing all the nested comments under a single top-level comment." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:DeepNestedThread a :Thread_Type ;
+digd:DeepNestedThread a digd:Thread_Type, owl:NamedIndividual ;
     rdfs:label "Deep-Nested Thread" ;
     rdfs:comment "A thread which has as its parent a nested comment, containing all the deep-nested comments under a single nested comment." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Positive a :Discourse_Sentiment ;
+digd:Positive a digd:Discourse_Sentiment, owl:NamedIndividual ;
     rdfs:label "Positive" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Negative a :Discourse_Sentiment ;
+digd:Negative a digd:Discourse_Sentiment, owl:NamedIndividual ;
     rdfs:label "Negative" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Author a :User_Role ;
+digd:Author a digd:User_Role, owl:NamedIndividual ;
     rdfs:label "Author" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Reader a :User_Role ;
+digd:Reader a digd:User_Role, owl:NamedIndividual ;
     rdfs:label "Reader" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Viewer a :User_Role ;
+digd:Viewer a digd:User_Role, owl:NamedIndividual ;
     rdfs:label "Viewer" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:Moderator a :User_Role ;
+digd:Moderator a digd:User_Role, owl:NamedIndividual ;
     rdfs:label "Moderator" ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-:OriginalPoster a :User_Role ;
+digd:OriginalPoster a digd:User_Role, owl:NamedIndividual ;
     rdfs:label "Original Poster" ;
     rdfs:comment "Colloquially termed as OP on different social media websites." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-#iteration 2 individuals
-
-schema:AudioObject a schema:MediaObject ;
+schema:AudioObject a schema:MediaObject, owl:NamedIndividual ;
     rdfs:label "Audio Object" ;
     rdfs:comment "An audio file." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:TextObject a schema:MediaObject ;
+schema:TextObject a schema:MediaObject, owl:NamedIndividual ;
     rdfs:label "Text Object" ;
     rdfs:comment "A text file. The text can be unformatted or contain markup, html, etc." ;
     rdfs:isDefinedBy <http://schema.org/> .
     
-schema:ImageObject a schema:MediaObject ;
+schema:ImageObject a schema:MediaObject, owl:NamedIndividual ;
     rdfs:label "Image Object" ;
     rdfs:comment "An image file." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:VideoObject a schema:MediaObject ;
+schema:VideoObject a schema:MediaObject, owl:NamedIndividual ;
     rdfs:label "Video Object" ;
     rdfs:comment "A video file." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:Comment a :InternetObject ;
+schema:Comment a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Comment" ;
     rdfs:comment "A response to an Internet Object such as a Post. This typically has some sort of text but can also include other media like images too." ;
     rdfs:isDefinedBy <http://schema.org/> . 
 
-schema:WebSite a :InternetObject ;
+schema:WebSite a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Website" ;
     rdfs:comment "A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:WebPage a :InternetObject ;
+schema:WebPage a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Webpage" ;
     rdfs:comment "A web page. Every web page is implicitly assumed to be declared to be of type WebPage, so the various properties about that webpage, such as <code>breadcrumb</code> may be used. We recommend explicit declaration if these properties are specified, but if they are found outside of an itemscope, they will be assumed to be about the page." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:WebPageElement a :InternetObject ;
+schema:WebPageElement a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Webpage Element" ;
     rdfs:comment "A web page element, like a table or an image." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-:Post a :InternetObject ;
+digd:Post a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Post" ;
     rdfs:comment " The most generic type of posting to any sort of webpage by a user, usually including some sort of media object." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-schema:SocialMediaPosting a :InternetObject ;
+schema:SocialMediaPosting a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Social Media Posting" ;
     rdfs:comment "A post to a social media platform, including blog posts, tweets, Facebook posts, etc." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:DiscussionForumPosting a :InternetObject ;
+schema:DiscussionForumPosting a digd:InternetObject, owl:NamedIndividual ;
     rdfs:label "Discussion Forum Posting" ;
     rdfs:comment "A posting to a discussion forum." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-schema:SoftwareSourceCode a :SoftwareObject ;
+schema:SoftwareSourceCode a digd:SoftwareObject, owl:NamedIndividual ;
     rdfs:label "Software source code" ;
     rdfs:comment "Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates." ;
     rdfs:isDefinedBy <http://schema.org/> .
 
-:UserPosts a :InternetAction ;
+digd:UserPosts a digd:InternetAction, owl:NamedIndividual ;
     rdfs:label "User Posts" ;
     rdfs:comment "A type of user interaction with a webpage which results in the creation of some post." ;
-    rdfs:isDefinedBy <https://w3id.org/golem/ontology/response#> .
+    rdfs:isDefinedBy <https://w3id.org/digd/ontology/> .
 
-schema:UserComments a :InternetAction ;
+schema:UserComments a digd:InternetAction, owl:NamedIndividual ;
     rdfs:label "User Comments" ;
     rdfs:comment "A type of user interaction with a webpage which results in the creation of some comment to a post." ;
     rdfs:isDefinedBy <http://schema.org/> .
